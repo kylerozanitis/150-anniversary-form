@@ -1,0 +1,23 @@
+{
+  "name": "150anniversaryform",
+  "version": "1.0.0",
+  "description": "150th Anniversary Form",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kylerozanitis/150-anniversary-form.git"
+  },
+  "author": "Kyle Rozanitis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kylerozanitis/150-anniversary-form/issues"
+  },
+  "homepage": "https://github.com/kylerozanitis/150-anniversary-form#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
