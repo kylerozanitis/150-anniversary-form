@@ -4,8 +4,8 @@
   "description": "150th Anniversary Form",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "server": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/kylerozanitis/150-anniversary-form#readme",
   "dependencies": {
+    "dotenv": "^7.0.0",
     "dropbox": "^4.0.16",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "nodemon": "^1.18.10"
   }
 }
