@@ -18,9 +18,12 @@
   },
   "homepage": "https://github.com/kylerozanitis/150-anniversary-form#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "dotenv": "^7.0.0",
     "dropbox": "^4.0.16",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "express-layout": "^0.1.0",
     "nodemon": "^1.18.10"
   }
 }
