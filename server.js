@@ -2,6 +2,11 @@ const express = require('express');
 const layout = require('express-layout');
 const http = require('http');
 const bodyParser = require('body-parser');
+const validator = require('express-validator');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const flash = require('express-flash');
+const helmet = require('helmet');
 const path = require('path');
 const routes = require('./routes');
 const Dropbox = require('dropbox');
@@ -12,10 +17,21 @@ const port = process.env.PORT || 5000;
 const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(helmet());
 
 const middleware = [
   express.static(path.join(__dirname, '../public')),
-  bodyParser.urlencoded({ extended: true })
+  bodyParser.urlencoded({ extended: true }),
+  validator(),
+  cookieParser(),
+  session({
+    secret: process.env.SECRET,
+    key: process.env.KEY,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { MAXAGE: 60000 }
+  }),
+  flash()
 ];
 
 app.use(middleware);
