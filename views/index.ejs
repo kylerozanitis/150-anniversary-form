@@ -1,19 +1,29 @@
 <div class="form-header">
   <h2>Stevens 150th Anniversary Nomination</h2>
+  <% if (Object.keys(errors).length === 0) { %> <% } else { %>
+  <h3 class="errors-heading">Oops, please correct the following:</h3>
+  <ul class="errors-list">
+    <% Object.values(errors).forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+  <% } %>
 </div>
 <form method="post" action="/" novalidate>
-  <div class="form-field">
-    <label for="nominee full name">Nominee Full Name</label>
+  <div class="form-field <%= errors.nominee ? 'form-field-invalid' : '' %>">
+    <label for="nominee">Nominee Full Name</label>
     <input
       class="input"
-      id="nominee-name"
-      name="nominee-full-name"
+      id="nominee"
+      name="nominee"
       type="text"
       alt="Nominee full name"
       placeholder="Nominee Name"
-    />
+    /><% data.nominee %> <% if (errors.nominee) { %>
+    <div class="error"><%= errors.nominee.msg %></div>
+    <% } %>
   </div>
-  <div class="form-field">
+  <div class="form-field <%= errors.explanation ? 'form-field-invalid' : '' %>">
     <label for="explanation">Explanation</label>
     <textarea
       class="input"
@@ -22,7 +32,13 @@
       rows="4"
       alt="Explanation for why this nominee"
       placeholder="Please provide a brief explanation of why you would like to nominate this person."
-    ></textarea>
+      autofocus
+    >
+<%= data.explanation %></textarea
+    >
+    <% if (errors.explanation) { %>
+    <div class="error"><%= errors.explanation.msg %></div>
+    <% } %>
   </div>
   <div class="form-actions">
     <button class="btn" type="submit">Submit</button>
