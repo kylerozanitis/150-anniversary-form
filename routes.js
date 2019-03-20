@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const upload = multer({ storage: multer.memoryStorage() });
 
 router.get('/', (req, res) => {
   res.render('index', {
@@ -25,8 +27,15 @@ router.post(
   [
     check('nominee')
       .isLength({ min: 1 })
-      .withMessage('Full name is required.')
+      .withMessage('Provide a full name for the nominee.')
       .trim(),
+    check('nominator')
+      .isLength({ min: 1 })
+      .withMessage('Provide your full name in the nominator section.')
+      .trim(),
+    check('email')
+      .isEmail()
+      .withMessage('That email does not look right.'),
     check('explanation')
       .isLength({ min: 20 })
       .withMessage('Provide an explanation at least 20 characters long.')
@@ -42,6 +51,10 @@ router.post(
     }
     const data = matchedData(req);
     console.log('Sanitized:', data);
+
+    if (req.file) {
+      console.log('Uploaded: ', req.file);
+    }
 
     req.flash('success', 'Thanks for nominating someone! Have a great day!');
     res.redirect('/confirmation');

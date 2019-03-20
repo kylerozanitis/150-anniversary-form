@@ -23,6 +23,32 @@
     <div class="error"><%= errors.nominee.msg %></div>
     <% } %>
   </div>
+  <div class="form-field <%= errors.nominator ? 'form-field-invalid' : '' %>">
+    <label for="nominator">Nominator Full Name</label>
+    <input
+      class="input"
+      id="nominator"
+      name="nominator"
+      type="text"
+      alt="Nominator full name"
+      placeholder="Nominator Name"
+    /><% data.nominator %> <% if (errors.nominator) { %>
+    <div class="error"><%= errors.nominator.msg %></div>
+    <% } %>
+  </div>
+  <div class="form-field <%= errors.email ? 'form-field-invalid' : '' %>">
+    <label for="email">Nominator Email</label>
+    <input
+      class="input"
+      id="email"
+      name="email"
+      type="email"
+      alt="Nominator Email"
+      placeholder="Nominator Email"
+    /><% data.email %> <% if (errors.email) { %>
+    <div class="error"><%= errors.email.msg %></div>
+    <% } %>
+  </div>
   <div class="form-field <%= errors.explanation ? 'form-field-invalid' : '' %>">
     <label for="explanation">Explanation</label>
     <textarea
@@ -39,6 +65,16 @@
     <% if (errors.explanation) { %>
     <div class="error"><%= errors.explanation.msg %></div>
     <% } %>
+  </div>
+  <div class="form-field">
+    <label for="photo">File Upload</label>
+    <input
+      class="input"
+      id="photo"
+      name="photo"
+      type="file"
+      alt="Upload picture or video"
+    />
   </div>
   <div class="form-actions">
     <button class="btn" type="submit">Submit</button>
