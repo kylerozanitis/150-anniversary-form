@@ -1,5 +1,37 @@
+const admin = require('firebase-admin');
+const serviceAccount = require('./serviceAccountKey.json');
 const Dropbox = require('dropbox');
 
+require('dotenv').config();
+
+// Initialize Firebase authentication
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: process.env.DB_URL
+});
+
+const db = admin.database();
+
+// Function to write nominee name, nominator name, nominator email, explanation, and file name to Firebase
+const writeData = (
+  nomineeName,
+  nominatorName,
+  nominatorEmail,
+  explanation,
+  fileName
+) => {
+  let postData = {
+    nomineeName: nomineeName,
+    nominatorName: nominatorName,
+    nominatorEmail: nominatorEmail,
+    explanation: explanation,
+    fileName: fileName
+  };
+
+  db.ref(`nominations/`).set(postData);
+};
+
+// Function to push file to Dropbox
 const uploadFile = () => {
   const UPLOAD_FILE_SIZE_LIMIT = 150 * 1024 * 1024;
   const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
