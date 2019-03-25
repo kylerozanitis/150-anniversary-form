@@ -9,7 +9,13 @@
   </ul>
   <% } %>
 </div>
-<form method="post" action="/" novalidate>
+<form
+  method="post"
+  action="/?_csrf=<%= csrfToken %>"
+  novalidate
+  enctype="multipart/form-data"
+>
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
   <div class="form-field <%= errors.nominee ? 'form-field-invalid' : '' %>">
     <label for="nominee">Nominee Full Name</label>
     <input
