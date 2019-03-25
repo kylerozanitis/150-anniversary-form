@@ -14,13 +14,13 @@ const db = admin.database();
 
 const exportedMethods = {
   // Function to write nominee name, nominator name, nominator email, explanation, and file name to Firebase
-  async writeData(eventObject) {
+  async writeData(eventObject, fileObject) {
     db.ref(`nominations/`).push({
       nomineeName: eventObject.nominee,
       nominatorName: eventObject.nominator,
       nominatorEmail: eventObject.email,
       explanation: eventObject.explanation,
-      fileName: eventObject.fileName
+      fileName: fileObject.originalname
     });
   }
 };

@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('express-flash');
 const helmet = require('helmet');
+const csrf = require('csurf');
 const path = require('path');
 const routes = require('./routes');
 const Dropbox = require('dropbox');
@@ -31,7 +32,8 @@ const middleware = [
     saveUninitialized: false,
     cookie: { MAXAGE: 60000 }
   }),
-  flash()
+  flash(),
+  csrf({ cookie: true })
 ];
 
 app.use(middleware);

@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const firebase = require('./database');
 const upload = multer({ storage: multer.memoryStorage() });
+const firebase = require('./database');
 
 router.get('/', (req, res) => {
   res.render('index', {
     data: {},
-    errors: {}
+    errors: {},
+    csrfToken: req.csrfToken()
   });
 });
 
@@ -25,6 +26,7 @@ const { matchedData } = require('express-validator/filter');
 
 router.post(
   '/',
+  upload.single('photo'),
   [
     check('nominee')
       .isLength({ min: 1 })
@@ -47,15 +49,17 @@ router.post(
     if (!errors.isEmpty()) {
       return res.render('index', {
         data: req.body,
-        errors: errors.mapped()
+        errors: errors.mapped(),
+        csrfToken: req.csrfToken()
       });
     }
     const data = matchedData(req);
     console.log('Sanitized:', data);
-    firebase.writeData(data);
 
     if (req.file) {
-      console.log('Uploaded: ', req.file);
+      firebase.writeData(data, req.file);
+    } else {
+      firebase.writeData(data);
     }
 
     req.flash('success', 'Thanks for nominating someone! Have a great day!');
