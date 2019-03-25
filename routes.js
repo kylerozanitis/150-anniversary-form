@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const firebase = require('./database');
 const upload = multer({ storage: multer.memoryStorage() });
 
 router.get('/', (req, res) => {
@@ -51,6 +52,7 @@ router.post(
     }
     const data = matchedData(req);
     console.log('Sanitized:', data);
+    firebase.writeData(data);
 
     if (req.file) {
       console.log('Uploaded: ', req.file);

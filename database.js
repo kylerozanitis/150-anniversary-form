@@ -12,24 +12,20 @@ admin.initializeApp({
 
 const db = admin.database();
 
-// Function to write nominee name, nominator name, nominator email, explanation, and file name to Firebase
-const writeData = (
-  nomineeName,
-  nominatorName,
-  nominatorEmail,
-  explanation,
-  fileName
-) => {
-  let postData = {
-    nomineeName: nomineeName,
-    nominatorName: nominatorName,
-    nominatorEmail: nominatorEmail,
-    explanation: explanation,
-    fileName: fileName
-  };
-
-  db.ref(`nominations/`).set(postData);
+const exportedMethods = {
+  // Function to write nominee name, nominator name, nominator email, explanation, and file name to Firebase
+  async writeData(eventObject) {
+    db.ref(`nominations/`).push({
+      nomineeName: eventObject.nominee,
+      nominatorName: eventObject.nominator,
+      nominatorEmail: eventObject.email,
+      explanation: eventObject.explanation,
+      fileName: eventObject.fileName
+    });
+  }
 };
+
+module.exports = exportedMethods;
 
 // Function to push file to Dropbox
 const uploadFile = () => {
