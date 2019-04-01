@@ -2,7 +2,11 @@
 
   <body>
     <div class="form-header">
-      <h2>Stevens 150th Anniversary Nomination</h2>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-6">Stevens 150th Anniversary Nomination</h1>
+            </div>
+          </div>
       <% if (Object.keys(errors).length === 0) { %> <% } else { %>
       <h3 class="errors-heading">Oops, please correct the following:</h3>
       <ul class="errors-list">
@@ -19,78 +23,94 @@
       enctype="multipart/form-data"
     >
       <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-      <div class="form-field <%= errors.nominee ? 'form-field-invalid' : '' %>">
-        <label for="nominee">Nominee Full Name</label>
-        <input
-          class="input"
-          id="nominee"
-          name="nominee"
-          type="text"
-          alt="Nominee full name"
-          placeholder="Nominee Name"
-        /><% data.nominee %> <% if (errors.nominee) { %>
-        <div class="error"><%= errors.nominee.msg %></div>
-        <% } %>
+
+      <!-- Nominee Name -->
+      <div class="form-group form-field form-row <%= errors.nominee ? 'form-field-invalid' : '' %>">
+        <div class="col-3">
+          <label for="nominee">Nominee Full Name</label>
+          <input
+            class="input form-control form-control-sm"
+            id="nominee"
+            name="nominee"
+            type="text"
+            alt="Nominee full name"
+            placeholder="John Smith"
+          /><% data.nominee %> <% if (errors.nominee) { %>
+          <div class="error"><%= errors.nominee.msg %></div>
+          <% } %>
+        </div>
       </div>
-      <div
-        class="form-field <%= errors.nominator ? 'form-field-invalid' : '' %>"
-      >
-        <label for="nominator">Nominator Full Name</label>
-        <input
-          class="input"
-          id="nominator"
-          name="nominator"
-          type="text"
-          alt="Nominator full name"
-          placeholder="Nominator Name"
-        /><% data.nominator %> <% if (errors.nominator) { %>
-        <div class="error"><%= errors.nominator.msg %></div>
-        <% } %>
+
+      <!-- Nominator Name -->
+      <div class="form-group form-field form-row <%= errors.nominator ? 'form-field-invalid' : '' %>">
+        <div class="col-3">
+          <label for="nominator">Nominator Full Name</label>
+          <input
+            class="input form-control form-control-sm"
+            id="nominator"
+            name="nominator"
+            type="text"
+            alt="Nominator full name"
+            placeholder="Jane Doe"
+          /><% data.nominator %> <% if (errors.nominator) { %>
+          <div class="error"><%= errors.nominator.msg %></div>
+          <% } %>
+        </div>
       </div>
-      <div class="form-field <%= errors.email ? 'form-field-invalid' : '' %>">
-        <label for="email">Nominator Email</label>
-        <input
-          class="input"
-          id="email"
-          name="email"
-          type="email"
-          alt="Nominator Email"
-          placeholder="Nominator Email"
-        /><% data.email %> <% if (errors.email) { %>
-        <div class="error"><%= errors.email.msg %></div>
-        <% } %>
+
+      <!-- Nominator Email -->
+      <div class="form-group form-field form-row <%= errors.email ? 'form-field-invalid' : '' %>">
+        <div class="col-3">
+          <label for="email">Nominator Email</label>
+          <input
+            class="input form-control form-control-sm"
+            id="email"
+            name="email"
+            type="email"
+            alt="Nominator Email"
+            placeholder="jane.doe@gmail.com"
+          /><% data.email %> <% if (errors.email) { %>
+          <div class="error"><%= errors.email.msg %></div>
+          <% } %>
+        </div>
       </div>
-      <div
-        class="form-field <%= errors.explanation ? 'form-field-invalid' : '' %>"
-      >
-        <label for="explanation">Explanation</label>
-        <textarea
-          class="input"
-          id="explanation"
-          name="explanation"
-          rows="4"
-          alt="Explanation for why this nominee"
-          placeholder="Please provide a brief explanation of why you would like to nominate this person."
-          autofocus
-        >
-<%= data.explanation %></textarea
-        >
-        <% if (errors.explanation) { %>
-        <div class="error"><%= errors.explanation.msg %></div>
-        <% } %>
+
+      <!-- Explanation for why this nominee -->
+      <div class="form-group form-field form-row <%= errors.explanation ? 'form-field-invalid' : '' %>">
+        <div class="col-6">
+          <label for="explanation">Explanation</label>
+          <textarea
+            class="input form-control form-control-sm"
+            id="explanation"
+            name="explanation"
+            rows="4"
+            alt="Explanation for why this nominee"
+            placeholder="Please provide a brief explanation of why you would like to nominate this person."
+            autofocus
+          ><%= data.explanation %></textarea>
+          <% if (errors.explanation) { %>
+          <div class="error"><%= errors.explanation.msg %></div>
+          <% } %>
+        </div>
       </div>
-      <div class="form-field">
-        <label for="photo">File Upload</label>
-        <input
-          class="input"
-          id="photo"
-          name="photo"
-          type="file"
-          alt="Upload picture or video"
-        />
+
+      <!-- File upload -->
+      <div class="input-group mb-3">
+        <div class="form-group form-field form-row custom-file">
+          <div class="col-6">
+            <label class="custom-file-label" for="photo">Choose File</label>
+            <input
+              class="input form-control form-control-sm custom-file-input"
+              id="photo"
+              name="photo"
+              type="file"
+              alt="Upload picture or video"
+            />
+          </div>
+        </div>
       </div>
       <div class="form-actions">
-        <button class="btn" type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
       </div>
     </form>
   </body>
