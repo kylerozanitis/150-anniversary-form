@@ -21,7 +21,7 @@ app.set('view engine', 'ejs');
 app.use(helmet());
 
 const middleware = [
-  express.static(path.join(__dirname, '../public')),
+  express.static(path.join(__dirname, '/public')),
   bodyParser.urlencoded({ extended: true }),
   validator(),
   cookieParser(),
