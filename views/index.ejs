@@ -2,10 +2,13 @@
 
 <body>
   <div class="form-header">
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container rounded">
-        <h1 class="display-6">Stevens 150th Anniversary Nomination</h1>
-      </div>
+    <div class="jumbotron">
+      <h1 class="display-5">Stevens 150th Anniversary Nomination</h1>
+      <hr class="my-4" />
+      <p>
+        This is dummy text that will explain the purpose of this nomination
+        form.
+      </p>
     </div>
     <% if (Object.keys(errors).length === 0) { %> <% } else { %>
     <h3 class="errors-heading">Oops, please correct the following:</h3>
@@ -40,6 +43,7 @@
             type="text"
             alt="Nominee full name"
             placeholder="John Smith"
+            autofocus
           /><% data.nominee %> <% if (errors.nominee) { %>
           <div class="error"><%= errors.nominee.msg %></div>
           <% } %>
@@ -97,7 +101,6 @@
             rows="4"
             alt="Explanation for why this nominee"
             placeholder="Please provide a brief explanation of why you would like to nominate this person."
-            autofocus
           >
 <%= data.explanation %></textarea
           >

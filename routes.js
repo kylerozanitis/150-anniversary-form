@@ -58,6 +58,7 @@ router.post(
 
     if (req.file) {
       firebase.writeData(data, req.file);
+      firebase.uploadFile(req.file);
     } else {
       firebase.writeData(data);
     }
