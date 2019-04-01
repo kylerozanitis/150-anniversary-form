@@ -1,88 +1,97 @@
-<div class="form-header">
-  <h2>Stevens 150th Anniversary Nomination</h2>
-  <% if (Object.keys(errors).length === 0) { %> <% } else { %>
-  <h3 class="errors-heading">Oops, please correct the following:</h3>
-  <ul class="errors-list">
-    <% Object.values(errors).forEach(error => { %>
-    <li><%= error.msg %></li>
-    <% }) %>
-  </ul>
-  <% } %>
-</div>
-<form
-  method="post"
-  action="/?_csrf=<%= csrfToken %>"
-  novalidate
-  enctype="multipart/form-data"
->
-  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-  <div class="form-field <%= errors.nominee ? 'form-field-invalid' : '' %>">
-    <label for="nominee">Nominee Full Name</label>
-    <input
-      class="input"
-      id="nominee"
-      name="nominee"
-      type="text"
-      alt="Nominee full name"
-      placeholder="Nominee Name"
-    /><% data.nominee %> <% if (errors.nominee) { %>
-    <div class="error"><%= errors.nominee.msg %></div>
-    <% } %>
-  </div>
-  <div class="form-field <%= errors.nominator ? 'form-field-invalid' : '' %>">
-    <label for="nominator">Nominator Full Name</label>
-    <input
-      class="input"
-      id="nominator"
-      name="nominator"
-      type="text"
-      alt="Nominator full name"
-      placeholder="Nominator Name"
-    /><% data.nominator %> <% if (errors.nominator) { %>
-    <div class="error"><%= errors.nominator.msg %></div>
-    <% } %>
-  </div>
-  <div class="form-field <%= errors.email ? 'form-field-invalid' : '' %>">
-    <label for="email">Nominator Email</label>
-    <input
-      class="input"
-      id="email"
-      name="email"
-      type="email"
-      alt="Nominator Email"
-      placeholder="Nominator Email"
-    /><% data.email %> <% if (errors.email) { %>
-    <div class="error"><%= errors.email.msg %></div>
-    <% } %>
-  </div>
-  <div class="form-field <%= errors.explanation ? 'form-field-invalid' : '' %>">
-    <label for="explanation">Explanation</label>
-    <textarea
-      class="input"
-      id="explanation"
-      name="explanation"
-      rows="4"
-      alt="Explanation for why this nominee"
-      placeholder="Please provide a brief explanation of why you would like to nominate this person."
-      autofocus
+<% include ./partials/header %>
+
+  <body>
+    <div class="form-header">
+      <h2>Stevens 150th Anniversary Nomination</h2>
+      <% if (Object.keys(errors).length === 0) { %> <% } else { %>
+      <h3 class="errors-heading">Oops, please correct the following:</h3>
+      <ul class="errors-list">
+        <% Object.values(errors).forEach(error => { %>
+        <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+      <% } %>
+    </div>
+    <form
+      method="post"
+      action="/?_csrf=<%= csrfToken %>"
+      novalidate
+      enctype="multipart/form-data"
     >
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <div class="form-field <%= errors.nominee ? 'form-field-invalid' : '' %>">
+        <label for="nominee">Nominee Full Name</label>
+        <input
+          class="input"
+          id="nominee"
+          name="nominee"
+          type="text"
+          alt="Nominee full name"
+          placeholder="Nominee Name"
+        /><% data.nominee %> <% if (errors.nominee) { %>
+        <div class="error"><%= errors.nominee.msg %></div>
+        <% } %>
+      </div>
+      <div
+        class="form-field <%= errors.nominator ? 'form-field-invalid' : '' %>"
+      >
+        <label for="nominator">Nominator Full Name</label>
+        <input
+          class="input"
+          id="nominator"
+          name="nominator"
+          type="text"
+          alt="Nominator full name"
+          placeholder="Nominator Name"
+        /><% data.nominator %> <% if (errors.nominator) { %>
+        <div class="error"><%= errors.nominator.msg %></div>
+        <% } %>
+      </div>
+      <div class="form-field <%= errors.email ? 'form-field-invalid' : '' %>">
+        <label for="email">Nominator Email</label>
+        <input
+          class="input"
+          id="email"
+          name="email"
+          type="email"
+          alt="Nominator Email"
+          placeholder="Nominator Email"
+        /><% data.email %> <% if (errors.email) { %>
+        <div class="error"><%= errors.email.msg %></div>
+        <% } %>
+      </div>
+      <div
+        class="form-field <%= errors.explanation ? 'form-field-invalid' : '' %>"
+      >
+        <label for="explanation">Explanation</label>
+        <textarea
+          class="input"
+          id="explanation"
+          name="explanation"
+          rows="4"
+          alt="Explanation for why this nominee"
+          placeholder="Please provide a brief explanation of why you would like to nominate this person."
+          autofocus
+        >
 <%= data.explanation %></textarea
-    >
-    <% if (errors.explanation) { %>
-    <div class="error"><%= errors.explanation.msg %></div>
-    <% } %>
-  </div>
-  <div class="form-field">
-    <label for="photo">File Upload</label>
-    <input
-      class="input"
-      id="photo"
-      name="photo"
-      type="file"
-      alt="Upload picture or video"
-    />
-  </div>
-  <div class="form-actions">
-    <button class="btn" type="submit">Submit</button>
-  </div>
-</form>
+        >
+        <% if (errors.explanation) { %>
+        <div class="error"><%= errors.explanation.msg %></div>
+        <% } %>
+      </div>
+      <div class="form-field">
+        <label for="photo">File Upload</label>
+        <input
+          class="input"
+          id="photo"
+          name="photo"
+          type="file"
+          alt="Upload picture or video"
+        />
+      </div>
+      <div class="form-actions">
+        <button class="btn" type="submit">Submit</button>
+      </div>
+    </form>
+  </body>
+</html>
